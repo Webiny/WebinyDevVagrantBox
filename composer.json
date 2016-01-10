@@ -1,0 +1,19 @@
+{
+    "name": "webiny/webiny-dev-box",
+    "description": "Vagrant dev box for Webiny Platform",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sven Al Hamad",
+            "email": "sven@webiny.com"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
