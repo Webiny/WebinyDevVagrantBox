@@ -4,10 +4,10 @@ memory: 1024
 cpus: 2
 provider: virtualbox
 
-authorize: ~/.ssh/id_rsa.pub
+#authorize: ~/.ssh/id_rsa.pub
 
-keys:
-    - ~/.ssh/id_rsa
+#keys:
+#    - ~/.ssh/id_rsa
 
 networking:
     - public: true
