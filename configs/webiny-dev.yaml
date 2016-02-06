@@ -17,6 +17,12 @@ folders:
       to: /home/vagrant/Code
       type: nfs
 
+ports:
+    - guest: 80
+      host: 8000
+    - guest: 27017
+      host: 27017
+
 #sites:
 #  - map: webiny.dev
 #    to: /home/vagrant/Code/Webiny/public
