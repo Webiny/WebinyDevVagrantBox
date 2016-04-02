@@ -12,7 +12,7 @@ class WebinyDev
     config.vm.network :private_network, ip: settings["ip"] ||= "192.168.22.22"
 
     if settings['networking'][0]['public']
-      config.vm.network "public_network", type: "dhcp"
+      config.vm.network "public_network", type: "dhcp", bridge: settings["bridge_interface"] ||= "en0: Wi-Fi 2 (AirPort)"
     end
 
     # Configure A Few VirtualBox Settings
