@@ -3,6 +3,7 @@ ip: "192.168.22.22"
 memory: 1024
 cpus: 2
 provider: virtualbox
+#bridge_interface: "en0: Wi-Fi 2 (AirPort)"
 
 #authorize: ~/.ssh/id_rsa.pub
 
