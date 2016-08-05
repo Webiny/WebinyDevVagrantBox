@@ -14,7 +14,7 @@ networking:
     - public: true
 
 folders:
-    - map: ~/Code
+    - map: Code
       to: /home/vagrant/Code
       type: nfs
 
