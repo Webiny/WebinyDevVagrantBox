@@ -99,7 +99,7 @@ class WebinyDev
     # Register All Of The Configured Shared Folders
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
-        config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil
+        config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
       end
     end
 
