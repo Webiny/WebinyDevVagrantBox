@@ -23,6 +23,8 @@ ports:
       host: 8000
     - guest: 27017
       host: 27017
+    - guest: 3000
+      host: 3000
 
 #sites:
 #  - map: webiny.dev
