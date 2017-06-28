@@ -1,7 +1,7 @@
 ---
 ip: "192.168.22.22"
 memory: 1024
-cpus: 2
+cpus: 1
 provider: virtualbox
 #bridge_interface: "en0: Wi-Fi 2 (AirPort)"
 
@@ -15,7 +15,7 @@ networking:
 
 folders:
     - map: Code
-      to: /home/vagrant/Code
+      to: /home/vagrant/code
       type: nfs
 
 ports:
@@ -28,4 +28,4 @@ ports:
 
 #sites:
 #  - map: webiny.dev
-#    to: /home/vagrant/Code/Webiny/public
+#    to: /home/vagrant/code/webiny/public
