@@ -1,10 +1,15 @@
 require 'json'
 require 'yaml'
+require_relative 'scripts/OS'
 
 VAGRANTFILE_API_VERSION = "2"
 
-unless Vagrant.has_plugin?("vagrant-notify-forwarder")
+unless (OS.windows? ||  Vagrant.has_plugin?("vagrant-notify-forwarder"))
   raise "vagrant-notify-forwarder is not installed!\n\nRun the following command to install the plugin:\n vagrant plugin install vagrant-notify-forwarder\n"
+end
+
+unless (OS.unix? || Vagrant.has_plugin?("vagrant-fsnotify"))
+  raise "vagrant-fsnotify is not installed!\n\nRun the following command to install the plugin:\n vagrant plugin install vagrant-fsnotify\n"
 end
 
 webinyDevYamlPath = File.expand_path("./configs/webiny-dev.yaml")

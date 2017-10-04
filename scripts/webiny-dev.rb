@@ -1,6 +1,7 @@
+require_relative 'OS'
+
 class WebinyDev
   def WebinyDev.configure(config, settings)
-
     # Configure The Box
     config.vm.box = settings["box"] ||= "webiny/webiny-dev"
     config.vm.hostname = settings["hostname"] ||= "webiny-dev"
@@ -12,7 +13,7 @@ class WebinyDev
     config.vm.network :private_network, ip: settings["ip"] ||= "192.168.22.22"
 
     if settings['networking'][0]['public']
-      config.vm.network "public_network", type: "dhcp", bridge: settings["bridge_interface"] ||= "en0: Wi-Fi 2 (AirPort)"
+      config.vm.network "public_network", type: "dhcp", bridge: settings["bridge_interface"] ||= nil
     end
 
     # Configure A Few VirtualBox Settings
@@ -99,7 +100,11 @@ class WebinyDev
     # Register All Of The Configured Shared Folders
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
-        config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
+        if OS.windows?
+          config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}, fsnotify: true, exclude: ["node_modules"]
+        else
+          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
+        end
       end
     end
 
