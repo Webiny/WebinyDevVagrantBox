@@ -1,7 +1,9 @@
 Webiny dev
 ==========
 
-Vagrant dev box for Webiny Platform 
+Vagrant dev box for Webiny Platform.
+
+For a tutorial on how to setup Webiny using Vagrant, visit [this link](https://www.webiny.com/hub/tutorials/installing-webiny-on-vagrant).
 
 Required plugins:
 
