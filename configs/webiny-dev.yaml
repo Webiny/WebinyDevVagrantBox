@@ -3,7 +3,7 @@ ip: "192.168.22.22"
 memory: 1024
 cpus: 1
 provider: virtualbox
-#bridge_interface: "en0: Wi-Fi 2 (AirPort)"
+#bridge_interface: "en0: Wi-Fi (AirPort)"
 
 #authorize: ~/.ssh/id_rsa.pub
 
@@ -25,3 +25,8 @@ ports:
       host: 27017
     - guest: 3000
       host: 3000
+
+sites:
+    - map: webiny.dev
+      to: /home/vagrant/code/webiny/public
+      host: 8000

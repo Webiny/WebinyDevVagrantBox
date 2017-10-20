@@ -1,4 +1,4 @@
-require_relative 'OS'
+require_relative 'os'
 
 class WebinyDev
   def WebinyDev.configure(config, settings)
@@ -76,6 +76,15 @@ class WebinyDev
       end
     end
 
+    # Install All The Configured Nginx Sites
+    settings["sites"].each do |site|
+      config.vm.provision "shell" do |s|
+          s.name = "Creating Site: " + site["map"]
+          s.inline = "sudo bash /vagrant/scripts/nginx.sh $1 $2 $3"
+          s.args = [site["map"], site["to"], site["host"]]
+      end
+    end
+
     # Configure The Public Key For SSH Access
     if settings.include? 'authorize'
       if File.exists? File.expand_path(settings["authorize"])
@@ -100,7 +109,7 @@ class WebinyDev
     # Register All Of The Configured Shared Folders
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
-        if OS.windows?
+        if os.windows?
           config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}, fsnotify: true, exclude: ["node_modules"]
         else
           config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}

@@ -1,17 +1,17 @@
-module OS
-  def OS.windows?
+module os
+  def os.windows?
     (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
   end
 
-  def OS.mac?
+  def os.mac?
     (/darwin/ =~ RUBY_PLATFORM) != nil
   end
 
-  def OS.unix?
-    !OS.windows?
+  def os.unix?
+    !os.windows?
   end
 
-  def OS.linux?
-    OS.unix? and not OS.mac?
+  def os.linux?
+    os.unix? and not os.mac?
   end
 end
