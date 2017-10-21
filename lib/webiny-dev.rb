@@ -109,7 +109,7 @@ class WebinyDev
     # Register All Of The Configured Shared Folders
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
-        if os.windows?
+        if OS.windows?
           config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}, fsnotify: true, exclude: ["node_modules"]
         else
           config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
