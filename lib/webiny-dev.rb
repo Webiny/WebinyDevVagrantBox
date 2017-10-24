@@ -4,6 +4,7 @@ class WebinyDev
   def WebinyDev.configure(config, settings)
     # Configure The Box
     config.vm.box = settings["box"] ||= "webiny/webiny-dev"
+    config.vm.box_version = settings["box_version"] ||= ">= 0"
     config.vm.hostname = settings["hostname"] ||= "webiny-dev"
 
     # Allow SSH Agent Forward from The Box

@@ -1,5 +1,6 @@
 ---
 ip: "192.168.22.22"
+box_version: 0.1.6
 memory: 1024
 cpus: 1
 provider: virtualbox
