@@ -10,9 +10,7 @@ class WebinyDev
     # Allow SSH Agent Forward from The Box
     config.ssh.forward_agent = true
 
-    # Configure Private Network
-    config.vm.network "private_network", type: "dhcp"
-
+    # Configure Public Network
     if settings['networking'][0]['public']
       config.vm.network "public_network", type: "dhcp", bridge: settings["bridge_interface"] ||= nil
     end
