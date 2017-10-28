@@ -1,10 +1,9 @@
 ---
-ip: "192.168.22.22"
 box_version: 0.1.6
 memory: 1024
 cpus: 1
 provider: virtualbox
-#bridge_interface: "en0: Wi-Fi (AirPort)"
+bridge_interface: ''
 
 #authorize: ~/.ssh/id_rsa.pub
 
@@ -15,8 +14,8 @@ networking:
     - public: true
 
 folders:
-    - map: Code
-      to: /home/vagrant/code
+    - map: ''
+      to: /home/vagrant/app
       type: nfs
 
 ports:
@@ -29,5 +28,5 @@ ports:
 
 sites:
     - map: webiny.dev
-      to: /home/vagrant/code/webiny/public
+      to: /home/vagrant/app/public_html
       host: 8000

@@ -10,8 +10,8 @@ class WebinyDev
     # Allow SSH Agent Forward from The Box
     config.ssh.forward_agent = true
 
-    # Configure A Private Network IP
-    config.vm.network :private_network, ip: settings["ip"] ||= "192.168.22.22"
+    # Configure Private Network
+    config.vm.network "private_network", type: "dhcp"
 
     if settings['networking'][0]['public']
       config.vm.network "public_network", type: "dhcp", bridge: settings["bridge_interface"] ||= nil
@@ -111,7 +111,7 @@ class WebinyDev
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
         if OS.windows?
-          config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}, fsnotify: true, exclude: ["node_modules"]
+          config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}, fsnotify: true, exclude: ["node_modules", ".idea"]
         else
           config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
         end
