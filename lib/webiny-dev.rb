@@ -113,7 +113,7 @@ class WebinyDev
         if OS.windows?
           config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}
         else
-          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
+          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,tcp,noatime,actimeo=1}
         end
       end
     end
