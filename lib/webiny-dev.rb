@@ -113,7 +113,7 @@ class WebinyDev
         if OS.windows?
           config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}
         else
-          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil
+          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, owner: folder["type"] != 'nfs' ? 'www-data' : nil
         end
       end
     end
