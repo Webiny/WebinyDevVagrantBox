@@ -4,10 +4,6 @@ require_relative 'lib/os'
 
 VAGRANTFILE_API_VERSION = "2"
 
-unless (OS.windows? ||  Vagrant.has_plugin?("vagrant-notify-forwarder"))
-  raise "vagrant-notify-forwarder is not installed!\n\nRun the following command to install the plugin:\n vagrant plugin install vagrant-notify-forwarder\n"
-end
-
 webinyDevYamlPath = File.expand_path("./configs/webiny-dev.yaml")
 afterScriptPath = File.expand_path("./scripts/customize.sh")
 aliasesPath = File.expand_path("./configs/aliases")
