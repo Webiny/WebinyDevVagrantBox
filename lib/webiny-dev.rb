@@ -122,5 +122,8 @@ class WebinyDev
     config.vm.provision "shell" do |s|
       s.inline = "/usr/local/bin/composer self-update --no-progress"
     end
+
+    # Configure notify_forwarder port
+    config.notify_forwarder.port = settings["notify_forwarder"]["port"] ||= 29324
   end
 end
