@@ -124,6 +124,8 @@ class WebinyDev
     end
 
     # Configure notify_forwarder port
-    config.notify_forwarder.port = settings["notify_forwarder"]["port"] ||= 29324
+    if settings.include? 'notify_forwarder'
+        config.notify_forwarder.port = settings["notify_forwarder"]["port"] ||= 29324
+    end
   end
 end
