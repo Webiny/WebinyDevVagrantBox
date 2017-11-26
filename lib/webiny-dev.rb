@@ -113,7 +113,8 @@ class WebinyDev
         if OS.windows?
           config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}
         else
-          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, owner: folder["type"] != 'nfs' ? 'vagrant' : nil
+          isNFS = folder["type"] == 'nfs'
+          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, owner: isNFS ? nil : 'vagrant'
         end
       end
     end
