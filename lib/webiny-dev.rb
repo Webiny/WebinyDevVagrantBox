@@ -1,16 +1,17 @@
-require_relative 'OS'
+require_relative 'os'
 
 class WebinyDev
   def WebinyDev.configure(config, settings)
     # Configure The Box
     config.vm.box = settings["box"] ||= "webiny/webiny-dev"
+    config.vm.box_version = settings["box_version"] ||= ">= 0"
     config.vm.hostname = settings["hostname"] ||= "webiny-dev"
 
     # Allow SSH Agent Forward from The Box
     config.ssh.forward_agent = true
 
-    # Configure A Private Network IP
-    config.vm.network :private_network, ip: settings["ip"] ||= "192.168.22.22"
+    # Configure Private Network
+    config.vm.network "private_network", type: "dhcp"
 
     if settings['networking'][0]['public']
       config.vm.network "public_network", type: "dhcp", bridge: settings["bridge_interface"] ||= nil
@@ -76,6 +77,15 @@ class WebinyDev
       end
     end
 
+    # Install All The Configured Nginx Sites
+    settings["sites"].each do |site|
+      config.vm.provision "shell" do |s|
+          s.name = "Creating Site: " + site["map"]
+          s.inline = "sudo bash /vagrant/scripts/nginx.sh $1 $2 $3"
+          s.args = [site["map"], site["to"], site["host"]]
+      end
+    end
+
     # Configure The Public Key For SSH Access
     if settings.include? 'authorize'
       if File.exists? File.expand_path(settings["authorize"])
@@ -101,9 +111,10 @@ class WebinyDev
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
         if OS.windows?
-          config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}, fsnotify: true, exclude: ["node_modules"]
+          config.vm.synced_folder folder["map"], folder["to"], mount_options: %w{dmode=777,fmode=777}
         else
-          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: %w{nolock,vers=3,udp,noatime,actimeo=1}
+          isNFS = folder["type"] == 'nfs'
+          config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, owner: isNFS ? nil : 'vagrant'
         end
       end
     end
@@ -111,6 +122,11 @@ class WebinyDev
     # Update Composer On Every Provision
     config.vm.provision "shell" do |s|
       s.inline = "/usr/local/bin/composer self-update --no-progress"
+    end
+
+    # Configure notify_forwarder port
+    if settings.include? 'notify_forwarder'
+        config.notify_forwarder.port = settings["notify_forwarder"]["port"] ||= 29324
     end
   end
 end
