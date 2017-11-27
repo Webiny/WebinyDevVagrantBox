@@ -1,12 +1,11 @@
-Webiny dev
+Webiny Dev
 ==========
 
 Vagrant dev box for Webiny Platform.
 
-For a tutorial on how to setup Webiny using Vagrant, visit [this link](https://www.webiny.com/hub/tutorials/installing-webiny-on-vagrant).
+Use our [GUI installer](https://www.webiny.com/download) to setup your vagrant project automatically.
 
-Required plugins:
-
+Optional plugin (installed automatically by the installer):
 - MacOS & Linux: `vagrant-notify-forwarder`
 
-Checkout [Webiny Hashicorp page](https://atlas.hashicorp.com/webiny/boxes/webiny-dev) for details
+Checkout [Webiny Hashicorp page](https://atlas.hashicorp.com/webiny/boxes/webiny-dev) for details.
